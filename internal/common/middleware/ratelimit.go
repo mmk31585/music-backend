@@ -18,7 +18,9 @@ func RateLimitIP(rdb *redis.Client, requests int, window time.Duration) gin.Hand
 			return
 		}
 
-		key := fmt.Sprintf("ratelimit:ip:%s:%s:%s", c.ClientIP(), c.Request.Method, c.Request.URL.Path)
+		// Use c.FullPath() to prevent bypass via varying :id values in routes
+		// that share the same route pattern (e.g., /api/v1/catalog/tracks/:id).
+		key := fmt.Sprintf("ratelimit:ip:%s:%s:%s", c.ClientIP(), c.Request.Method, c.FullPath())
 		count, err := rdb.Get(c.Request.Context(), key).Int()
 		if err == redis.Nil {
 			rdb.Set(c.Request.Context(), key, 1, window)
@@ -57,6 +59,7 @@ func RateLimitIP(rdb *redis.Client, requests int, window time.Duration) gin.Hand
 // RateLimitOptional applies a rate limit per user ID when available,
 // falling back to IP address for unauthenticated callers. This is designed
 // for routes using OptionalAuth to prevent abuse by anonymous users.
+// Uses c.FullPath() for consistent routing-level limits.
 func RateLimitOptional(rdb *redis.Client, requestsPerMinute int) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		if rdb == nil {
@@ -64,19 +67,19 @@ func RateLimitOptional(rdb *redis.Client, requestsPerMinute int) gin.HandlerFunc
 			return
 		}
 
-		// Build a unique key scoped to user+route to prevent cross-route exhaustion
+		// Key includes user ID when available, IP otherwise.
+		// Route normalization via c.FullPath() ensures consistent rate limits.
 		var key string
 		userIDRaw, exists := c.Get("auth_user_id")
 		if exists {
-			// Safe type assertion with ok check — prevents panic if value is not string
 			userIDStr, ok := userIDRaw.(string)
 			if ok && userIDStr != "" {
-				key = fmt.Sprintf("ratelimit:user:%s:%s:%s", userIDStr, c.Request.Method, c.Request.URL.Path)
+				key = fmt.Sprintf("ratelimit:user:%s:%s:%s", userIDStr, c.Request.Method, c.FullPath())
 			} else {
-				key = fmt.Sprintf("ratelimit:ip:%s:%s:%s", c.ClientIP(), c.Request.Method, c.Request.URL.Path)
+				key = fmt.Sprintf("ratelimit:ip:%s:%s:%s", c.ClientIP(), c.Request.Method, c.FullPath())
 			}
 		} else {
-			key = fmt.Sprintf("ratelimit:ip:%s:%s:%s", c.ClientIP(), c.Request.Method, c.Request.URL.Path)
+			key = fmt.Sprintf("ratelimit:ip:%s:%s:%s", c.ClientIP(), c.Request.Method, c.FullPath())
 		}
 
 		count, err := rdb.Get(c.Request.Context(), key).Int()

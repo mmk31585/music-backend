@@ -117,10 +117,8 @@ func (h *Handler) StreamTrack(c *gin.Context) {
 
 	c.Header("Content-Type", contentType)
 	c.Header("Accept-Ranges", "bytes")
-	c.Header("Cache-Control", "public, max-age=3600, immutable")
-	c.Header("Access-Control-Allow-Origin", "*")
+	c.Header("Cache-Control", "public, max-age=3600")
 	c.Header("Access-Control-Expose-Headers", "Accept-Ranges, Content-Range, Content-Length")
-	c.Header("Cross-Origin-Resource-Policy", "cross-origin")
 	// Stream directly from S3 to HTTP response without loading entire file into RAM
 	io.Copy(c.Writer, stream)
 }
@@ -155,10 +153,8 @@ func (h *Handler) StreamAdminTrack(c *gin.Context) {
 
 	c.Header("Content-Type", contentType)
 	c.Header("Accept-Ranges", "bytes")
-	c.Header("Cache-Control", "public, max-age=3600, immutable")
-	c.Header("Access-Control-Allow-Origin", "*")
+	c.Header("Cache-Control", "public, max-age=3600")
 	c.Header("Access-Control-Expose-Headers", "Accept-Ranges, Content-Range, Content-Length")
-	c.Header("Cross-Origin-Resource-Policy", "cross-origin")
 	// Stream directly from S3 to HTTP response without loading entire file into RAM
 	io.Copy(c.Writer, stream)
 }

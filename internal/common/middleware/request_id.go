@@ -4,6 +4,7 @@ import (
 	"context"
 	"net/http"
 
+	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
 )
 
@@ -24,4 +25,18 @@ func RequestID(next http.Handler) http.Handler {
 
 		next.ServeHTTP(w, r.WithContext(ctx))
 	})
+}
+
+// GinRequestID is the gin-native equivalent of RequestID. The logger reads
+// the ID from gin's context, so this must run before GinZapLogger.
+func GinRequestID() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		requestID := c.GetHeader("X-Request-ID")
+		if requestID == "" {
+			requestID = uuid.NewString()
+		}
+		c.Set(string(RequestIDKey), requestID)
+		c.Header("X-Request-ID", requestID)
+		c.Next()
+	}
 }

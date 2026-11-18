@@ -84,8 +84,10 @@ func main() {
 		middleware.SecurityHeaders(),
 		middleware.CORS(application.Config.CORS.AllowedOrigins, log),
 		middleware.OIDCTokenMiddleware(),
+		middleware.GinRequestID(),
 		otelgin.Middleware("music-api"),
-		middleware.GinZapLogger(log),
+		// Never log /ws query strings (bearer token leaks into access logs).
+		middleware.GinZapLogger(log, "/api/v1/ws"),
 		middleware.GinZapRecovery(log),
 		middleware.Sentry(),
 	)

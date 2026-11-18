@@ -13,15 +13,6 @@ func RegisterPublicRoutes(router *gin.RouterGroup, handler *Handler) {
 	}
 }
 
-func RegisterPrivateRoutes(router *gin.RouterGroup, handler *Handler, authMW gin.HandlerFunc) {
-	playerGroup := router.Group("/admin/player")
-	playerGroup.Use(authMW)
-	{
-		playerGroup.GET("/tracks/:id", handler.GetAdminPlaybackTrack)
-		playerGroup.GET("/tracks/:id/stream", handler.StreamAdminTrack)
-	}
-}
-
 func RegisterAdminRoutes(router *gin.RouterGroup, handler *Handler, authMW gin.HandlerFunc, adminMW gin.HandlerFunc) {
 	playerGroup := router.Group("/admin/player")
 	playerGroup.Use(authMW, adminMW)
