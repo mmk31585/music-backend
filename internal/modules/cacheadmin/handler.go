@@ -17,10 +17,10 @@ func NewHandler(rdb *redis.Client) *Handler {
 
 // CacheStatus holds the current cache status returned by GetStatus.
 type CacheStatus struct {
-	Connected     bool   `json:"connected"`
-	KeyCount      int64  `json:"key_count"`
-	MemoryBytes   int64  `json:"memory_bytes"`
-	UptimeSeconds int64  `json:"uptime_seconds"`
+	Connected     bool  `json:"connected"`
+	KeyCount      int64 `json:"key_count"`
+	MemoryBytes   int64 `json:"memory_bytes"`
+	UptimeSeconds int64 `json:"uptime_seconds"`
 }
 
 // GetStatus returns the current Redis cache status.

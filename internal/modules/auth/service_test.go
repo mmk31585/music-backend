@@ -5,8 +5,8 @@ import (
 	"testing"
 	"time"
 
-	"net/http"
 	apperrors "music/internal/common/errors"
+	"net/http"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
@@ -78,15 +78,15 @@ func TestService_Register_Success(t *testing.T) {
 
 	now := time.Now()
 	expectedUser := User{
-		ID:             "user-1",
-		Email:          "test@example.com",
-		Username:       "testuser",
-		DisplayName:    "Test User",
-		PasswordHash:   "hashed",
-		Role:           "user",
-		IsActive:       true,
-		CreatedAt:      now,
-		UpdatedAt:      now,
+		ID:           "user-1",
+		Email:        "test@example.com",
+		Username:     "testuser",
+		DisplayName:  "Test User",
+		PasswordHash: "hashed",
+		Role:         "user",
+		IsActive:     true,
+		CreatedAt:    now,
+		UpdatedAt:    now,
 	}
 
 	mockRepo.On("CreateUser", mock.Anything, mock.MatchedBy(func(u User) bool {

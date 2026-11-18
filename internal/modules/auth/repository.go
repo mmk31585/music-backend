@@ -9,8 +9,8 @@ import (
 	"strings"
 	"time"
 
-	"net/http"
 	apperrors "music/internal/common/errors"
+	"net/http"
 
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgconn"
@@ -328,10 +328,10 @@ func (r *Repository) UpdateUser(ctx context.Context, id string, updates map[stri
 		col, ok := allowedUserUpdateColumns[key]
 		if !ok {
 			// Reject unknown keys instead of interpolating them raw (SQL injection prevention)
-		return apperrors.New(http.StatusBadRequest, apperrors.CodeBadRequest, "unknown user field: "+key, map[string]string{
-			"field":   key,
-			"allowed": "role, is_active, email_verified, display_name, username, email, avatar_url",
-		})
+			return apperrors.New(http.StatusBadRequest, apperrors.CodeBadRequest, "unknown user field: "+key, map[string]string{
+				"field":   key,
+				"allowed": "role, is_active, email_verified, display_name, username, email, avatar_url",
+			})
 		}
 
 		// Handle email_verified as a special boolean→SET NULL logic

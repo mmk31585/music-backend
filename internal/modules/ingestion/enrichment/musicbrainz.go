@@ -69,11 +69,11 @@ func (c *musicBrainzClient) SearchRecording(ctx context.Context, query TrackQuer
 
 	var mbResp struct {
 		Recordings []struct {
-			ID     string `json:"id"`
-			Title  string `json:"title"`
-			Length *int   `json:"length,omitempty"`
+			ID           string `json:"id"`
+			Title        string `json:"title"`
+			Length       *int   `json:"length,omitempty"`
 			ArtistCredit []struct {
-				Name string `json:"name"`
+				Name   string `json:"name"`
 				Artist struct {
 					ID string `json:"id"`
 				} `json:"artist"`

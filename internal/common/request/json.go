@@ -24,19 +24,19 @@ func DecodeJSON(w http.ResponseWriter, r *http.Request, dst interface{}) error {
 
 		switch {
 		case errors.As(err, &syntaxError):
-		return apperrors.New(http.StatusBadRequest, apperrors.CodeBadRequest, "invalid JSON syntax", map[string]interface{}{
-			"offset": syntaxError.Offset,
-		})
+			return apperrors.New(http.StatusBadRequest, apperrors.CodeBadRequest, "invalid JSON syntax", map[string]interface{}{
+				"offset": syntaxError.Offset,
+			})
 
 		case errors.Is(err, io.ErrUnexpectedEOF):
 			return apperrors.New(http.StatusBadRequest, apperrors.CodeBadRequest, "invalid JSON", "unexpected end of JSON")
 
 		case errors.As(err, &unmarshalTypeError):
-		return apperrors.New(http.StatusBadRequest, apperrors.CodeBadRequest, "invalid JSON field type", map[string]interface{}{
-			"field":  unmarshalTypeError.Field,
-			"type":   unmarshalTypeError.Type.String(),
-			"offset": unmarshalTypeError.Offset,
-		})
+			return apperrors.New(http.StatusBadRequest, apperrors.CodeBadRequest, "invalid JSON field type", map[string]interface{}{
+				"field":  unmarshalTypeError.Field,
+				"type":   unmarshalTypeError.Type.String(),
+				"offset": unmarshalTypeError.Offset,
+			})
 
 		case errors.Is(err, io.EOF):
 			return apperrors.New(http.StatusBadRequest, apperrors.CodeBadRequest, "request body is required", nil)

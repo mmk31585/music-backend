@@ -14,15 +14,15 @@ type Permission struct {
 }
 
 type Role struct {
-	ID              int64     `json:"id" db:"id"`
-	Slug            string    `json:"slug" db:"slug"`
-	Label           string    `json:"label" db:"label"`
-	Description     string    `json:"description,omitempty" db:"description"`
-	HierarchyLevel  int       `json:"hierarchyLevel" db:"hierarchy_level"`
-	IsSystemRole    bool      `json:"isSystemRole" db:"is_system_role"`
-	IsActive        bool      `json:"isActive" db:"is_active"`
-	CreatedAt       time.Time `json:"createdAt" db:"created_at"`
-	UpdatedAt       time.Time `json:"updatedAt" db:"updated_at"`
+	ID             int64     `json:"id" db:"id"`
+	Slug           string    `json:"slug" db:"slug"`
+	Label          string    `json:"label" db:"label"`
+	Description    string    `json:"description,omitempty" db:"description"`
+	HierarchyLevel int       `json:"hierarchyLevel" db:"hierarchy_level"`
+	IsSystemRole   bool      `json:"isSystemRole" db:"is_system_role"`
+	IsActive       bool      `json:"isActive" db:"is_active"`
+	CreatedAt      time.Time `json:"createdAt" db:"created_at"`
+	UpdatedAt      time.Time `json:"updatedAt" db:"updated_at"`
 }
 
 type UserRole struct {

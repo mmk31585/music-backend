@@ -17,8 +17,8 @@ import (
 	"github.com/stretchr/testify/mock"
 	"github.com/stretchr/testify/require"
 
-	"music/internal/common/response"
 	apperrors "music/internal/common/errors"
+	"music/internal/common/response"
 	platformstorage "music/internal/platform/storage"
 )
 
@@ -159,12 +159,12 @@ func TestCreateDraft_Success(t *testing.T) {
 	_, r := setupHandlerTest(mockSvc, nil)
 
 	expected := Draft{
-		ID:                "draft_1",
-		UploadedBy:        testUserID,
-		OriginalFilename:  "song.mp3",
-		Status:            "pending",
-		UploadSource:      string(SourceListener),
-		NeedsReview:       true,
+		ID:               "draft_1",
+		UploadedBy:       testUserID,
+		OriginalFilename: "song.mp3",
+		Status:           "pending",
+		UploadSource:     string(SourceListener),
+		NeedsReview:      true,
 	}
 	mockSvc.On("CreateDraft", mock.Anything, testUserID, mock.Anything).Return(expected, nil)
 
@@ -408,4 +408,3 @@ func TestListPendingDrafts_Success(t *testing.T) {
 	require.Equal(t, http.StatusOK, w.Code)
 	mockSvc.AssertExpectations(t)
 }
-

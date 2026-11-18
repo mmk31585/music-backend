@@ -1,9 +1,9 @@
 package finalization
 
 import (
+	"bytes"
 	"context"
 	"errors"
-	"bytes"
 	"io"
 	"testing"
 	"time"
@@ -34,7 +34,7 @@ func (m *mockStorage) Copy(ctx context.Context, srcKey, dstKey string) error {
 func (m *mockStorage) Upload(ctx context.Context, key string, _ io.Reader, _ int64, _ string) error {
 	return nil
 }
-func (m *mockStorage) Delete(ctx context.Context, _ string) error { return nil }
+func (m *mockStorage) Delete(ctx context.Context, _ string) error          { return nil }
 func (m *mockStorage) Get(ctx context.Context, key string) ([]byte, error) { return nil, nil }
 func (m *mockStorage) PresignPut(ctx context.Context, key string, contentType string, ttl time.Duration) (string, error) {
 	return "http://presigned-url.example.com/" + key, nil

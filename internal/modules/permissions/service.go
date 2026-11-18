@@ -7,8 +7,8 @@ import (
 )
 
 const (
-	cacheTTL      = 5 * time.Minute
-	cleanupEvery  = 10 * time.Minute
+	cacheTTL     = 5 * time.Minute
+	cleanupEvery = 10 * time.Minute
 )
 
 type ServiceInterface interface {

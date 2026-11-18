@@ -43,9 +43,9 @@ func loadRedisConfig() RedisConfig {
 	}
 
 	return RedisConfig{
-		Addr:      opts.Addr,
-		Password:  opts.Password,
-		DB:        opts.DB,
+		Addr:        opts.Addr,
+		Password:    opts.Password,
+		DB:          opts.DB,
 		DialTimeout: 1 * time.Second,
 		MaxRetries:  1,
 	}

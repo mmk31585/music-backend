@@ -212,5 +212,3 @@ func (h *Handler) ListPayments(c *gin.Context) {
 		"payments": payments,
 	})
 }
-
-

@@ -8,7 +8,7 @@ import (
 )
 
 type CleanupService struct {
-	repo  *Repository
+	repo   *Repository
 	logger *zap.Logger
 }
 

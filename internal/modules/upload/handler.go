@@ -27,15 +27,15 @@ var allowedAudioExt = map[string]bool{
 
 // allowedAudioMime is the allowlist of audio MIME types detected by magic bytes.
 var allowedAudioMime = map[string]bool{
-	"audio/mpeg":       true,
-	"audio/ogg":        true,
-	"audio/flac":       true,
-	"audio/wav":        true,
-	"audio/x-wav":      true,
-	"audio/wave":       true,
-	"audio/mp4":        true,
-	"audio/aac":        true,
-	"application/ogg":  true,
+	"audio/mpeg":      true,
+	"audio/ogg":       true,
+	"audio/flac":      true,
+	"audio/wav":       true,
+	"audio/x-wav":     true,
+	"audio/wave":      true,
+	"audio/mp4":       true,
+	"audio/aac":       true,
+	"application/ogg": true,
 }
 
 type Handler struct {

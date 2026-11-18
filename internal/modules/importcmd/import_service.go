@@ -300,12 +300,12 @@ func (s *ImportService) enqueueJob(ctx context.Context, title, artist, album, ur
 			return nil, err
 		}
 		return &ImportResponse{
-			JobID:   jobID,
-			DraftID: resp.DraftID,
-			Title:   resp.Title,
-			Artist:  resp.Artist,
+			JobID:    jobID,
+			DraftID:  resp.DraftID,
+			Title:    resp.Title,
+			Artist:   resp.Artist,
 			Duration: resp.Duration,
-			Message: "track imported successfully",
+			Message:  "track imported successfully",
 		}, nil
 	}
 

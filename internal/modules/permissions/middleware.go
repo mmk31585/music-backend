@@ -14,7 +14,7 @@ import (
 func RequirePermission(svc ServiceInterface, permSlug string) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		userIDValue, _ := c.Get("auth_user_id")
-	userID := userIDValue.(string)
+		userID := userIDValue.(string)
 		if userID == "" {
 			response.Error(c, apperrors.New(http.StatusUnauthorized, apperrors.CodeUnauthorized, "authentication required", nil))
 			c.Abort()
@@ -45,7 +45,7 @@ func RequirePermission(svc ServiceInterface, permSlug string) gin.HandlerFunc {
 func RequireAnyPermission(svc ServiceInterface, permSlugs ...string) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		userIDValue, _ := c.Get("auth_user_id")
-	userID := userIDValue.(string)
+		userID := userIDValue.(string)
 		if userID == "" {
 			response.Error(c, apperrors.New(http.StatusUnauthorized, apperrors.CodeUnauthorized, "authentication required", nil))
 			c.Abort()
@@ -76,7 +76,7 @@ func RequireAnyPermission(svc ServiceInterface, permSlugs ...string) gin.Handler
 func InjectUserAccess(svc ServiceInterface) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		userIDValue, _ := c.Get("auth_user_id")
-	userID := userIDValue.(string)
+		userID := userIDValue.(string)
 		if userID == "" {
 			c.Next()
 			return

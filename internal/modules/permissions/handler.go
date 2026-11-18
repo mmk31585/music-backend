@@ -78,10 +78,10 @@ func (h *Handler) CreateRole(c *gin.Context) error {
 	}
 
 	role := Role{
-		Slug:            req.Slug,
-		Label:           req.Label,
-		Description:     req.Description,
-		HierarchyLevel:  req.HierarchyLevel,
+		Slug:           req.Slug,
+		Label:          req.Label,
+		Description:    req.Description,
+		HierarchyLevel: req.HierarchyLevel,
 	}
 
 	created, err := h.svc.CreateRole(c.Request.Context(), role)

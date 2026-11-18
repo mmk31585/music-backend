@@ -3,8 +3,8 @@ package validator
 import (
 	"strings"
 
-	"net/http"
 	apperrors "music/internal/common/errors"
+	"net/http"
 
 	govalidator "github.com/go-playground/validator/v10"
 )

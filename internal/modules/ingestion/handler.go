@@ -25,13 +25,13 @@ import (
 
 // uploadStep labels each phase of the upload flow for structured logs.
 const (
-	uploadStepParse      = "parse_multipart_form"
-	uploadStepFileRead   = "read_uploaded_file"
-	uploadStepMetadata   = "extract_metadata"
-	uploadStepS3Put      = "s3_put_object"
-	uploadStepS3GetURL   = "s3_get_url"
-	uploadStepDBCreate   = "db_create_draft"
-	uploadStepPresign    = "s3_presign_upload_url"
+	uploadStepParse    = "parse_multipart_form"
+	uploadStepFileRead = "read_uploaded_file"
+	uploadStepMetadata = "extract_metadata"
+	uploadStepS3Put    = "s3_put_object"
+	uploadStepS3GetURL = "s3_get_url"
+	uploadStepDBCreate = "db_create_draft"
+	uploadStepPresign  = "s3_presign_upload_url"
 )
 
 type Handler struct {

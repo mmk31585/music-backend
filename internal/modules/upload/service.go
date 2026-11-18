@@ -151,11 +151,11 @@ func (s *Service) AttachFile(ctx context.Context, draftID, userID, storageKey, f
 
 func (s *Service) AddCoUploader(ctx context.Context, trackID int64, req CoUploaderRequest) (CoUploader, error) {
 	co := CoUploader{
-		TrackID:           trackID,
-		UserID:            req.UserID,
-		Role:              req.Role,
-		XpSharePercent:    req.XpSharePercent,
-		ContributionType:  req.ContributionType,
+		TrackID:          trackID,
+		UserID:           req.UserID,
+		Role:             req.Role,
+		XpSharePercent:   req.XpSharePercent,
+		ContributionType: req.ContributionType,
 	}
 	return s.repo.AddCoUploader(ctx, co)
 }

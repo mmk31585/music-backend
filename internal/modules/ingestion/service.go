@@ -33,10 +33,10 @@ const (
 )
 
 type Service struct {
-	storage   platformstorage.Storage
-	repo      *Repository
-	enricher  *enrichment.Enricher
-	trackSvc  trackCatalogService
+	storage  platformstorage.Storage
+	repo     *Repository
+	enricher *enrichment.Enricher
+	trackSvc trackCatalogService
 }
 
 // trackCatalog.Service is defined in catalog/track package

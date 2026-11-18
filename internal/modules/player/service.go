@@ -3,11 +3,11 @@ package player
 import (
 	"context"
 	"errors"
+	"io"
 	"log"
 	"mime"
 	"net/url"
 	"path/filepath"
-	"io"
 	"strings"
 
 	"github.com/google/uuid"

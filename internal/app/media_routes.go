@@ -25,7 +25,7 @@ func RegisterMediaRoutes(r *gin.Engine, mediaRoot string) {
 		r.GET("/uploads/*filepath", func(c *gin.Context) {
 			c.Header("Content-Type", "application/json")
 			c.Status(http.StatusServiceUnavailable)
-			_, _ = c.Writer.Write([]byte(`{"success":false,"message":"media serving requires S3 storage on serverless; set STORAGE_DRIVER=s3 and configure S3_BUCKET/S3_ENDPOINT"}`,))
+			_, _ = c.Writer.Write([]byte(`{"success":false,"message":"media serving requires S3 storage on serverless; set STORAGE_DRIVER=s3 and configure S3_BUCKET/S3_ENDPOINT"}`))
 		})
 		return
 	}

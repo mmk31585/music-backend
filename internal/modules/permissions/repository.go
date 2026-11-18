@@ -203,10 +203,10 @@ func (r *Repository) CreateRole(ctx context.Context, role Role) (Role, error) {
 
 func (r *Repository) UpdateRole(ctx context.Context, id int64, updates map[string]any) error {
 	allowed := map[string]string{
-		"label":       "label",
-		"description": "description",
+		"label":           "label",
+		"description":     "description",
 		"hierarchy_level": "hierarchy_level",
-		"is_active":   "is_active",
+		"is_active":       "is_active",
 	}
 
 	setClauses := make([]string, 0, len(updates))

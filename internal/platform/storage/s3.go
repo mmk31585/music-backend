@@ -129,9 +129,9 @@ func (s *S3Storage) Upload(ctx context.Context, key string, reader io.Reader, si
 	key = strings.TrimLeft(key, "/")
 
 	input := &s3.PutObjectInput{
-		Bucket:   aws.String(s.bucket),
-		Key:      aws.String(key),
-		Body:     reader,
+		Bucket: aws.String(s.bucket),
+		Key:    aws.String(key),
+		Body:   reader,
 	}
 	if contentType != "" {
 		input.ContentType = aws.String(contentType)

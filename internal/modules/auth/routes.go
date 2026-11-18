@@ -15,7 +15,7 @@ func RegisterRoutes(rg *gin.RouterGroup, handler *Handler, authMW gin.HandlerFun
 	{
 		auth.POST("/register", middleware.RateLimitIP(rdb, 3, time.Minute), handler.Register)
 		auth.POST("/login", middleware.RateLimitIP(rdb, 5, time.Minute), handler.Login)
-	auth.POST("/forgot-password", middleware.RateLimitIP(rdb, 3, time.Minute), handler.ForgotPassword)
+		auth.POST("/forgot-password", middleware.RateLimitIP(rdb, 3, time.Minute), handler.ForgotPassword)
 		auth.POST("/refresh", middleware.RateLimitIP(rdb, 5, time.Minute), handler.Refresh)
 		auth.POST("/logout", authMW, handler.Logout)
 

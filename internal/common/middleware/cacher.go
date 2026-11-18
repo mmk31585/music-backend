@@ -89,12 +89,12 @@ func (rc *ResponseCache) Cache(ttl time.Duration) gin.HandlerFunc {
 		etag := fmt.Sprintf(`"%x"`, sha256.Sum256(body))
 
 		entry := &cacheEntry{
-			Status:  c.Writer.Status(),
-			Body:    body,
-			ETag:    etag,
-			Type:    c.Writer.Header().Get("Content-Type"),
-			Enc:     c.Writer.Header().Get("Content-Encoding"),
-			Lang:    c.Writer.Header().Get("Content-Language"),
+			Status: c.Writer.Status(),
+			Body:   body,
+			ETag:   etag,
+			Type:   c.Writer.Header().Get("Content-Type"),
+			Enc:    c.Writer.Header().Get("Content-Encoding"),
+			Lang:   c.Writer.Header().Get("Content-Language"),
 		}
 
 		ttlToUse := ttl

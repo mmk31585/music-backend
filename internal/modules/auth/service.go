@@ -5,9 +5,9 @@ import (
 	"strings"
 	"time"
 
-	"net/http"
 	apperrors "music/internal/common/errors"
 	"music/internal/platform/events"
+	"net/http"
 
 	"github.com/google/uuid"
 	"go.uber.org/zap"

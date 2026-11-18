@@ -6,11 +6,11 @@ import (
 	"path/filepath"
 	"sync"
 
+	catalogTrack "music/internal/modules/catalog/track"
 	"music/internal/modules/importcmd/acquisition"
 	importworker "music/internal/modules/importcmd/worker"
 	"music/internal/modules/ingestion"
 	"music/internal/modules/ingestion/enrichment"
-	catalogTrack "music/internal/modules/catalog/track"
 	platformstorage "music/internal/platform/storage"
 	"music/internal/workers/analytics"
 	"music/internal/workers/cleanup"

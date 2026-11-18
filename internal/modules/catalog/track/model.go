@@ -111,8 +111,8 @@ type UpdateRequest struct {
 	TrackNumber     **int       `json:"track_number"`
 	Explicit        *bool       `json:"explicit"`
 
-	AudioURL     **string   `json:"audio_url"`
-	CoverURL     **string   `json:"cover_url"`
+	AudioURL     **string    `json:"audio_url"`
+	CoverURL     **string    `json:"cover_url"`
 	AudioMediaID **uuid.UUID `json:"audio_media_id"`
 	CoverMediaID **uuid.UUID `json:"cover_media_id"`
 

@@ -478,9 +478,9 @@ func TestKeyGeneration(t *testing.T) {
 	gin.SetMode(gin.TestMode)
 
 	tests := []struct {
-		name     string
-		setup    func(*gin.Context)
-		prefix   string
+		name   string
+		setup  func(*gin.Context)
+		prefix string
 	}{
 		{
 			name: "without auth",
