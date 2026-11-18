@@ -1,0 +1,218 @@
+erDiagram
+    users ||--o{ auth_sessions : "owns"
+    users ||--o{ playlists : "owns"
+    users ||--o{ liked_tracks : "likes"
+    users ||--o{ liked_albums : "likes"
+    users ||--o{ followed_artists : "follows"
+    users ||--o{ play_history : "plays"
+    users ||--o{ upload_slots : "has"
+    users ||--o{ co_uploaders : "uploads"
+    users ||--|{ ingestion_drafts : "reviews"
+
+    artists ||--o{ albums : "creates"
+    artists ||--o{ tracks : "creates"
+    artists ||--o{ track_artists : "performs_on"
+    artists ||--o{ album_artists : "performs_on"
+    artists ||--o{ track_credits : "credited_on"
+
+    albums ||--o{ tracks : "contains"
+    albums ||--o{ track_artists : "featured_on"
+    albums ||--o{ album_artists : "credited_on"
+    albums ||--o{ liked_albums : "liked_by"
+
+    tracks ||--o{ track_genres : "classified_by"
+    tracks ||--o{ playlist_tracks : "in_playlist"
+    tracks ||--o{ liked_tracks : "liked_by"
+    tracks ||--o{ play_history : "played_in"
+    tracks ||--o{ track_artists : "has_artist"
+    tracks ||--o{ track_credits : "has_credit"
+    tracks ||--o{ co_uploaders : "uploaded_by"
+    tracks ||--o{ media : "audio_media"
+    tracks ||--o{ media : "cover_media"
+    tracks ||--o{ media_assets : "audio_asset"
+    tracks ||--o{ media_assets : "cover_asset"
+
+    genres ||--o{ track_genres : "applies_to"
+
+    playlists ||--o{ playlist_tracks : "contains"
+
+    media ||--o{ artists : "avatar/banner"
+    media ||--o{ albums : "cover"
+    media_assets ||--o{ tracks : "asset"
+
+    ingestion_drafts }|--|| music_clubs : "submitted_to"
+    ingestion_drafts }o--|| users : "reviewed_by"
+
+%% Core identity & auth
+users {
+    uuid id PK
+    varchar email UK
+    varchar username UK
+    varchar display_name
+    text password_hash
+    varchar role
+    boolean is_active
+    timestamptz created_at
+}
+
+auth_sessions {
+    uuid id PK
+    uuid user_id FK
+    text refresh_token_hash UK
+    timestamptz expires_at
+    timestamptz created_at
+}
+
+%% Catalog
+artists {
+    uuid id PK
+    varchar name
+    varchar slug UK
+    text bio
+    text image_url
+    uuid avatar_media_id FK
+    uuid banner_media_id FK
+    timestamptz created_at
+}
+
+albums {
+    uuid id PK
+    uuid artist_id FK
+    varchar title
+    varchar slug
+    date release_date
+    uuid cover_media_id FK
+    timestamptz created_at
+}
+
+tracks {
+    uuid id PK
+    uuid artist_id FK
+    uuid album_id FK
+    uuid audio_media_id FK
+    uuid cover_media_id FK
+    uuid audio_asset_id FK
+    uuid cover_asset_id FK
+    varchar title
+    varchar slug
+    int duration_seconds
+    boolean is_public
+    bigint play_count
+    timestamptz created_at
+}
+
+genres {
+    uuid id PK
+    varchar name UK
+    varchar slug UK
+}
+
+track_genres {
+    uuid track_id FK
+    uuid genre_id FK
+}
+
+track_artists {
+    uuid track_id FK
+    uuid artist_id FK
+    varchar role
+    int position
+}
+
+album_artists {
+    uuid album_id FK
+    uuid artist_id FK
+    varchar role
+    int position
+}
+
+track_credits {
+    uuid id PK
+    uuid track_id FK
+    uuid artist_id FK
+    varchar role
+}
+
+%% Library & social
+playlists {
+    uuid id PK
+    uuid user_id FK
+    uuid owner_id FK
+    varchar name
+    boolean is_public
+    timestamptz created_at
+}
+
+playlist_tracks {
+    uuid playlist_id FK
+    uuid track_id FK
+    int position
+    uuid added_by FK
+    timestamptz added_at
+}
+
+liked_tracks {
+    uuid user_id FK
+    uuid track_id FK
+    timestamptz liked_at
+}
+
+liked_albums {
+    uuid user_id FK
+    uuid album_id FK
+}
+
+followed_artists {
+    uuid user_id FK
+    uuid artist_id FK
+}
+
+play_history {
+    uuid user_id FK
+    uuid track_id FK
+    timestamptz played_at
+}
+
+%% Media & storage
+media {
+    uuid id PK
+    varchar kind
+    text url
+    text media_type
+    varchar storage_provider
+    text object_key
+    jsonb metadata
+    timestamptz created_at
+}
+
+media_assets {
+    uuid id PK
+}
+
+%% Uploads
+upload_slots {
+    uuid user_id UK FK
+    int used_slots
+    int max_slots
+}
+
+co_uploaders {
+    uuid track_id FK
+    uuid user_id FK
+    varchar role
+    numeric xp_share_percent
+}
+
+ingestion_drafts {
+    uuid id PK
+    uuid club_id FK
+    uuid reviewed_by FK
+    text upload_source
+    boolean needs_review
+}
+
+lyrics {
+    uuid track_id FK
+    varchar language
+    text content
+}
