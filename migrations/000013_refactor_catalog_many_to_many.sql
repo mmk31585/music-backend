@@ -13,9 +13,6 @@ ALTER TABLE albums
 ALTER TABLE tracks
     ALTER COLUMN id SET DEFAULT gen_random_uuid();
 
-ALTER TABLE genres
-    ALTER COLUMN id SET DEFAULT gen_random_uuid();
-
 -- Central media table.
 CREATE TABLE IF NOT EXISTS media (
                                      id UUID PRIMARY KEY DEFAULT gen_random_uuid(),

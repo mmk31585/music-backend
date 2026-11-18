@@ -126,7 +126,7 @@ func TestCacheEntryEncodeDecode_RoundTrip(t *testing.T) {
 			assert.Equal(t, tt.entry.Enc, decoded.Enc)
 			assert.Equal(t, tt.entry.Lang, decoded.Lang)
 
-			if tt.entry.Body == nil || len(tt.entry.Body) == 0 {
+			if len(tt.entry.Body) == 0 {
 				assert.Nil(t, decoded.Body, "empty/nil body should decode to nil")
 			} else {
 				assert.Equal(t, tt.entry.Body, decoded.Body, "body mismatch")
@@ -203,7 +203,7 @@ func TestBinaryWriteReadBytes(t *testing.T) {
 			got, err := binaryReadBytes(r)
 			require.NoError(t, err)
 
-			if tt.input == nil || len(tt.input) == 0 {
+			if len(tt.input) == 0 {
 				assert.Nil(t, got, "nil/empty input should decode to nil")
 			} else {
 				assert.Equal(t, tt.input, got)

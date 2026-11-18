@@ -266,6 +266,18 @@ type Overview struct {
 	StorageUsedMB  float64 `db:"storage_used_mb"`
 }
 
+// ToOverviewResponse converts this DB overview to the response DTO.
+func (ov Overview) ToOverviewResponse() OverviewResponse {
+	return OverviewResponse{
+		TotalTracks:    ov.TotalTracks,
+		TotalUsers:     ov.TotalUsers,
+		TotalAlbums:    ov.TotalAlbums,
+		TotalPlays:     ov.TotalPlays,
+		ActiveUsers24h: ov.ActiveUsers24h,
+		StorageUsedMB:  ov.StorageUsedMB,
+	}
+}
+
 func (r *Repository) GetOverview(ctx context.Context) (Overview, error) {
 	var ov Overview
 	err := r.db.GetContext(ctx, &ov, `

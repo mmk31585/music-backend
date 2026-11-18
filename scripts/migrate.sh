@@ -2,8 +2,10 @@
 
 set -e
 
+export PATH="$(go env GOPATH)/bin:$PATH"
+
 if [ -z "$POSTGRES_URL" ]; then
-  export POSTGRES_URL="postgres://postgres:postgres@localhost:5432/musicapp?sslmode=disable"
+  export POSTGRES_URL="postgres://ava_user:ava_pass@127.0.0.1:5432/ava_db?sslmode=disable"
 fi
 
 # Extract DB name from URL and build a URL to the 'postgres' maintenance database

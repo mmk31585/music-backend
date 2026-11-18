@@ -1,8 +1,6 @@
 package middleware
 
 import (
-	"crypto/rand"
-	"encoding/hex"
 	"net/http"
 	"time"
 
@@ -118,19 +116,6 @@ func GinZapRecovery(log *zap.Logger, skipPaths ...string) gin.HandlerFunc {
 		}()
 		c.Next()
 	}
-}
-
-// Helper functions (you can replace with your own UUID generator)
-func generateRequestID() string {
-	// Example: return uuid.New().String()
-	// For simplicity, using timestamp + random – replace with actual UUID.
-	return time.Now().Format("20060102150405") + "-" + randomString(8)
-}
-
-func randomString(n int) string {
-	b := make([]byte, n)
-	rand.Read(b)
-	return hex.EncodeToString(b)[:n]
 }
 
 func getRequestID(c *gin.Context) string {

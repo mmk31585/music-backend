@@ -32,14 +32,7 @@ func (h *Handler) GetOverview(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, OverviewResponse{
-		TotalTracks:    ov.TotalTracks,
-		TotalUsers:     ov.TotalUsers,
-		TotalAlbums:    ov.TotalAlbums,
-		TotalPlays:     ov.TotalPlays,
-		ActiveUsers24h: ov.ActiveUsers24h,
-		StorageUsedMB:  ov.StorageUsedMB,
-	})
+	c.JSON(http.StatusOK, ov.ToOverviewResponse())
 }
 
 // TrackEvent godoc
